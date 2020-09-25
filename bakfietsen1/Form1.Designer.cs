@@ -70,9 +70,8 @@
             this.Total.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Total.Location = new System.Drawing.Point(724, 321);
             this.Total.Name = "Total";
-            this.Total.Size = new System.Drawing.Size(94, 29);
+            this.Total.Size = new System.Drawing.Size(0, 29);
             this.Total.TabIndex = 1;
-            this.Total.Text = "Totaal:";
             // 
             // groupBox1
             // 
@@ -140,6 +139,7 @@
             this.OptieBikeTxt.Name = "OptieBikeTxt";
             this.OptieBikeTxt.Size = new System.Drawing.Size(126, 26);
             this.OptieBikeTxt.TabIndex = 0;
+            this.OptieBikeTxt.TextChanged += new System.EventHandler(this.OptieBikeTxt_TextChanged);
             // 
             // groupBox2
             // 
@@ -191,6 +191,7 @@
             this.helm_Bx.TabIndex = 4;
             this.helm_Bx.Text = "Helm";
             this.helm_Bx.UseVisualStyleBackColor = true;
+            this.helm_Bx.CheckedChanged += new System.EventHandler(this.helm_Bx_CheckedChanged);
             // 
             // KaartHouder
             // 
@@ -201,6 +202,7 @@
             this.KaartHouder.TabIndex = 3;
             this.KaartHouder.Text = "Kaarthouder";
             this.KaartHouder.UseVisualStyleBackColor = true;
+            this.KaartHouder.CheckedChanged += new System.EventHandler(this.KaartHouder_CheckedChanged);
             // 
             // Smartphone_Bx
             // 
@@ -211,6 +213,7 @@
             this.Smartphone_Bx.TabIndex = 2;
             this.Smartphone_Bx.Text = "SmartphoneHouder";
             this.Smartphone_Bx.UseVisualStyleBackColor = true;
+            this.Smartphone_Bx.CheckedChanged += new System.EventHandler(this.Smartphone_Bx_CheckedChanged);
             // 
             // babystoeltje_Bx
             // 
@@ -221,6 +224,7 @@
             this.babystoeltje_Bx.TabIndex = 1;
             this.babystoeltje_Bx.Text = "Babystoeltje";
             this.babystoeltje_Bx.UseVisualStyleBackColor = true;
+            this.babystoeltje_Bx.CheckedChanged += new System.EventHandler(this.babystoeltje_Bx_CheckedChanged);
             // 
             // regendakBx
             // 
@@ -231,6 +235,7 @@
             this.regendakBx.TabIndex = 0;
             this.regendakBx.Text = "Regendak";
             this.regendakBx.UseVisualStyleBackColor = true;
+            this.regendakBx.CheckedChanged += new System.EventHandler(this.regendakBx_CheckedChanged);
             // 
             // Titel
             // 
