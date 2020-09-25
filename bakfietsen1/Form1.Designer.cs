@@ -167,6 +167,7 @@
             0,
             0,
             0});
+            this.Aantaldagen.ValueChanged += new System.EventHandler(this.Aantaldagen_ValueChanged);
             // 
             // groupBox3
             // 

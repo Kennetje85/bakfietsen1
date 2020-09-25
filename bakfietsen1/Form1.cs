@@ -1,40 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
 
 namespace bakfietsen1
 {
-    enum option
-    {
-        None = 0,
-        ClassicShort = 10,
-        ClassicShortEbike = 20,
-        ClassicLargeBike = 30,
-        ClassicLargeEbike = 40
-    }
 
     public partial class Form1 : Form
     {
-        double optie;
-        double result1;
         int aantaldagen;
         decimal[] bikePrice = new decimal[5];
-        decimal[] accesoires = new decimal[6];
         int optionBike;
         readonly string errorTotalMsg = @" Optie not a number";
         readonly string errorOptionOutOfRange = @"Option needs to be between 1 and 4";
         readonly string errorOngeldigWaarde = @"Ongeldig waarde";
-        option test = option.None;
+        readonly string BabyStoeltje = @"BabyStoeltje";
+        readonly string RegenDak = @"RegenDak";
         List<Accessiores> checkBoxItems = new List<Accessiores>();
 
 
@@ -47,7 +27,7 @@ namespace bakfietsen1
             bikePrice[2] = 20;
             bikePrice[3] = 30;
             bikePrice[4] = 40;
-            test = option.None;
+            
         }
 
         public void getString(decimal prijs)
@@ -60,66 +40,13 @@ namespace bakfietsen1
         {
             TotaleKosten.Text = string.Format("Huidige huurkosten {0}", prijs);
         }
-
-        void accesoires_price()
-        {
-
-            if (regendakBx.Checked == true)
-            {
-                accesoires[1] = 12;
-            }
-            else
-            {
-                accesoires[1] = 0;
-            }
-
-            if (babystoeltje_Bx.Checked == true)
-            {
-                accesoires[2] = 20;
-            }
-            else
-            {
-                accesoires[2] = 0;
-            }
-
-            if (Smartphone_Bx.Checked == true)
-            {
-                accesoires[3] = 8;
-            }
-            else
-            {
-                accesoires[3] = 0;
-            }
-
-            if (KaartHouder.Checked == true)
-            {
-                accesoires[4] = 5;
-            }
-            else
-            {
-                accesoires[4] = 0;
-            }
-            if (helm_Bx.Checked == true)
-            {
-                accesoires[5] = 10;
-            }
-            else
-            {
-                accesoires[5] = 0;
-            }
-        }
-
+       
         public decimal calculate_Bikeprice()
         {
             decimal result = 0;
 
             aantaldagen = Convert.ToInt32(Aantaldagen.Value);
             var isValid = Int32.TryParse(OptieBikeTxt.Text, out optionBike); // fix datatype conversion here
-            optie = optionBike; //Convert.ToDouble(OptieBikeTxt.Text);
-
-            accesoires_price();  // methode aanroepen
-                                 //bool loopBreak = true;
-
 
             result = aantaldagen * bikePrice[optionBike];
 
@@ -193,7 +120,6 @@ namespace bakfietsen1
             catch
             {
                 TotaleKosten.Text = errorTotalMsg;
-                //Total.Text = errorTotalMsg;
                 return false;
             }
             return true;
@@ -202,21 +128,15 @@ namespace bakfietsen1
         private void regendakBx_CheckedChanged(object sender, EventArgs e)
         {
 
-            regendakBx.Checked?AddToAccessoryList("Regendak"):RemoveFromAccessoryList("Regendak");
-            //if (regendakBx.Checked)
-            //{
-            //    var accessoire = new Accessiores
-            //    {
-            //        Name = "Regendak",
-            //        Bedrag = 12
 
-            //    };
-            //    checkBoxItems.Add(accessoire);
-            //}
-            //else {
-            //    checkBoxItems.RemoveAll((x) => x.Name == "Regendak");
-            //}
-
+            if (regendakBx.Checked)
+            {
+                AddToAccessoryList(RegenDak,12);
+            }
+            else
+            {
+                RemoveFromAccessoryList(RegenDak);
+            }
 
         }
 
@@ -224,17 +144,11 @@ namespace bakfietsen1
         {
             if (babystoeltje_Bx.Checked)
             {
-                var accessoire = new Accessiores
-                {
-                    Name = "BabyStoeltje",
-                    Bedrag = 20
-
-                };
-                checkBoxItems.Add(accessoire);
+                AddToAccessoryList(BabyStoeltje,20);
             }
             else
             {
-                checkBoxItems.RemoveAll((x) => x.Name == "BabyStoeltje");
+                RemoveFromAccessoryList(BabyStoeltje);
             }
         }
 
@@ -253,12 +167,12 @@ namespace bakfietsen1
 
         }
 
-        private void AddToAccessoryList(string name) 
+        private void AddToAccessoryList(string name,decimal bedrag) 
         {
             var accessoire = new Accessiores
             {
                 Name = name,
-                Bedrag = 20
+                Bedrag = bedrag
 
             };
             checkBoxItems.Add(accessoire);
@@ -267,6 +181,18 @@ namespace bakfietsen1
         private void RemoveFromAccessoryList(string name) 
         {
             checkBoxItems.RemoveAll((x) => x.Name == name);
+        }
+
+        private void Aantaldagen_ValueChanged(object sender, EventArgs e)
+        {
+            if (ValidateOption(OptieBikeTxt.Text))
+            {
+                showHuidigeHuur(calculate_Bikeprice());
+            }
+            else
+            {
+                TotaleKosten.Text = errorOngeldigWaarde;
+            }
         }
     }
 }
