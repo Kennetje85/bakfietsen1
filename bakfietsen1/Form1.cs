@@ -15,6 +15,9 @@ namespace bakfietsen1
         readonly string errorOngeldigWaarde = @"Ongeldig waarde";
         readonly string BabyStoeltje = @"BabyStoeltje";
         readonly string RegenDak = @"RegenDak";
+        readonly string Smartphone = @"Smartphone";
+        readonly string Kaarthouder = @"Kaarthouder";
+        readonly string Helm = @"Helm";
         List<Accessiores> checkBoxItems = new List<Accessiores>();
 
 
@@ -27,12 +30,12 @@ namespace bakfietsen1
             bikePrice[2] = 20;
             bikePrice[3] = 30;
             bikePrice[4] = 40;
-            
+
         }
 
         public void getString(decimal prijs)
         {
-            TotaleKosten.Text = string.Format("Totale Kosten {0}", prijs);
+            TotaleKosten.Text = string.Format("Totale Kosten met accesoires {0}", prijs);
 
         }
 
@@ -40,7 +43,7 @@ namespace bakfietsen1
         {
             TotaleKosten.Text = string.Format("Huidige huurkosten {0}", prijs);
         }
-       
+
         public decimal calculate_Bikeprice()
         {
             decimal result = 0;
@@ -55,7 +58,7 @@ namespace bakfietsen1
             //    result = result + item;
             //}
 
-            foreach (var item in checkBoxItems) 
+            foreach (var item in checkBoxItems)
             {
                 result = result + item.Bedrag;
             }
@@ -131,7 +134,7 @@ namespace bakfietsen1
 
             if (regendakBx.Checked)
             {
-                AddToAccessoryList(RegenDak,12);
+                AddToAccessoryList(RegenDak, 12);
             }
             else
             {
@@ -144,7 +147,7 @@ namespace bakfietsen1
         {
             if (babystoeltje_Bx.Checked)
             {
-                AddToAccessoryList(BabyStoeltje,20);
+                AddToAccessoryList(BabyStoeltje, 20);
             }
             else
             {
@@ -154,20 +157,41 @@ namespace bakfietsen1
 
         private void Smartphone_Bx_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (Smartphone_Bx.Checked)
+            {
+                AddToAccessoryList(Smartphone, 8);
+            }
+            else
+            {
+                RemoveFromAccessoryList(Smartphone);
+            }
         }
 
         private void KaartHouder_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (KaartHouder.Checked)
+            {
+                AddToAccessoryList(Kaarthouder, 5);
+            }
+            else
+            {
+                RemoveFromAccessoryList(Kaarthouder);
+            }
         }
 
         private void helm_Bx_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (helm_Bx.Checked)
+            {
+                AddToAccessoryList(Helm, 10);
+            }
+            else
+            {
+                RemoveFromAccessoryList(Helm);
+            }
         }
 
-        private void AddToAccessoryList(string name,decimal bedrag) 
+        private void AddToAccessoryList(string name, decimal bedrag)
         {
             var accessoire = new Accessiores
             {
@@ -178,7 +202,7 @@ namespace bakfietsen1
             checkBoxItems.Add(accessoire);
         }
 
-        private void RemoveFromAccessoryList(string name) 
+        private void RemoveFromAccessoryList(string name)
         {
             checkBoxItems.RemoveAll((x) => x.Name == name);
         }
@@ -193,6 +217,11 @@ namespace bakfietsen1
             {
                 TotaleKosten.Text = errorOngeldigWaarde;
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
